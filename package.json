@@ -11,10 +11,13 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@storybook/preset-scss": "1.0.3",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "1.37.0"
+    "sass": "1.37.0",
+    "storybook": "6.3.6",
+    "storybook-css-modules-preset": "1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
@@ -23,7 +26,10 @@
     "@storybook/addon-links": "^6.3.6",
     "@storybook/react": "^6.3.6",
     "babel-loader": "^8.2.2",
+    "css-loader": "6.2.0",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "sass-loader": "12.1.0",
+    "style-loader": "3.2.1"
   }
 }
