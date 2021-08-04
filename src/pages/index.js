@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { Post } from "../components/Posts";
 import { PostForm } from "../components/PostForm";
+import { Bio } from "../components/Bio";
 import styles from "../styles/Home.module.scss";
+import avatar from "../res/avatar.png";
 
 export default function Home() {
   return (
@@ -13,6 +15,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <Bio
+          handshot={avatar.src}
+          name="JiYoon Lee"
+          tagline="learning nextJS"
+          role="frone-end"
+        />
         <h1 className={styles.title}>My Post</h1>
         <ul className={styles.posts}>
           <li>

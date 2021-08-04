@@ -3,10 +3,23 @@
   line-height: 43px;
   margin-bottom: 0.4em;
 }
+.postMeta {
+  list-style: none;
+  padding: 0;
 
-.postsDate {
+  display: flex;
+  align-items: center;
+}
+.postMetaData {
+  display: flex;
+  align-items: center;
   font-weight: 600;
   font-size: 26px;
   line-height: 33px;
   margin-top: 0.4em;
+  margin-right: 1em;
+}
+.postMetaData > svg {
+  font-size: 0.85em;
+  margin-right: 0.3em;
 }
