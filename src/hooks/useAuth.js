@@ -5,7 +5,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   useEffect(() => {
-    init((user) => setUser(user));
+    init((user) => {
+      console.log(user);
+      setUser(user);
+    });
   });
 
   function logIn() {
