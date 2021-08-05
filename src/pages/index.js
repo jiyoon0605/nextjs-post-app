@@ -8,7 +8,7 @@ import { useAuth } from "../hooks/useAuth";
 
 export default function Home() {
   const { user, logIn } = useAuth();
-
+  console.log("user", user);
   return (
     <div className={styles.container}>
       <Head>

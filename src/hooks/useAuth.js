@@ -9,8 +9,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   function logIn() {
-    authLogin();
-    console.log("Log in!");
+    authLogin((user) => setUser(user));
   }
   const userContext = { user, logIn };
   return (
