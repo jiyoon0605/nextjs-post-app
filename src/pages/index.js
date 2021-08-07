@@ -6,9 +6,9 @@ import styles from "../styles/Home.module.scss";
 import avatar from "../res/avatar.png";
 import { useAuth } from "../hooks/useAuth";
 
-export default function Home() {
+export default function Home({ posts }) {
   const { user, logIn, logOut } = useAuth();
-  console.log("user", user);
+  console.log(posts);
   return (
     <div className={styles.container}>
       <Head>
@@ -35,15 +35,34 @@ export default function Home() {
         />
         <h1 className={styles.title}>My Post</h1>
         <ul className={styles.posts}>
-          <li>
-            <Post
-              contents="at Function.getInitialProps loadGetInitialProps at renderToHTML"
-              date="2021.08.01"
-            />
-          </li>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Post contents={post.content} date={post.date} />
+            </li>
+          ))}
         </ul>
         <PostForm />
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(
+    "https://api.airtable.com/v0/appH07n9qNuWkjHOS/Posts",
+    {
+      headers: {
+        Authorization: "Bearer keyq6zVtjIXOLmrqp",
+      },
+    }
+  );
+
+  const { records } = await res.json();
+  const posts = records.map((record) => ({ id: record.id, ...record.fields }));
+
+  return {
+    props: {
+      posts,
+    },
+  };
 }
