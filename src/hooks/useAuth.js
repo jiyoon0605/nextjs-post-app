@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     auth.on("login", setUser);
 
     return () => auth.off("logout", setUser);
-  });
+  }, []);
 
   function logIn() {
     authLogin((user) => setUser(user));

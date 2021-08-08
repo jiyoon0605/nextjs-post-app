@@ -18,7 +18,12 @@ const Post = ({ contents, date }) => {
           </p>
         </li>
         <li>
-          <p className={styles.postMetaData}>{date}</p>
+          <p className={styles.postMetaData}>
+            {new Intl.DateTimeFormat("ko-KR", {
+              dateStyle: "short",
+              timeStyle: "short",
+            }).format(new Date(date))}
+          </p>
         </li>
       </ul>
     </>

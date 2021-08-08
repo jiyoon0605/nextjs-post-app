@@ -5,10 +5,26 @@ import { Bio } from "../components/Bio";
 import styles from "../styles/Home.module.scss";
 import avatar from "../res/avatar.png";
 import { useAuth } from "../hooks/useAuth";
+import { useEffect, useState } from "react";
 
-export default function Home({ posts }) {
+export default function Home({ posts: defaultPosts }) {
+  const [posts, updatedPost] = useState(defaultPosts);
   const { user, logIn, logOut } = useAuth();
-  console.log(posts);
+
+  async function handleOnSubmit(data, e) {
+    e.preventDefault();
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
+    );
+    const { posts } = await response.json();
+    updatedPost(posts);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -41,25 +57,17 @@ export default function Home({ posts }) {
             </li>
           ))}
         </ul>
-        <PostForm />
+        {!user && <PostForm onSubmit={handleOnSubmit} />}
       </main>
     </div>
   );
 }
 
 export async function getStaticProps() {
-  const res = await fetch(
-    "https://api.airtable.com/v0/appH07n9qNuWkjHOS/Posts",
-    {
-      headers: {
-        Authorization: "Bearer keyq6zVtjIXOLmrqp",
-      },
-    }
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
   );
-
-  const { records } = await res.json();
-  const posts = records.map((record) => ({ id: record.id, ...record.fields }));
-
+  const { posts } = await response.json();
   return {
     props: {
       posts,
