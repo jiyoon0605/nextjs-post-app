@@ -13,10 +13,10 @@ export async function getAllPosts() {
   // sortable.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const res = await fetch(
-    `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Posts`,
+    `https://api.airtable.com/v0/appH07n9qNuWkjHOS/Posts`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
+        Authorization: `Bearer keyq6zVtjIXOLmrqp`,
       },
     }
   );
