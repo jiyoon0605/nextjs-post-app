@@ -28,7 +28,10 @@ export default async (req, res) => {
       },
     });
     const authJson = await auth.json();
-    console.log("authJson", authJson);
+    if (!authJson.id) {
+      res.status(401).json({ error: "Invaild token" });
+      return;
+    }
     const { content } = JSON.parse(req.body);
     const data = {
       fields: {

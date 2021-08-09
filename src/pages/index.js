@@ -28,11 +28,15 @@ export default function Home({ posts: defaultPosts }) {
       </Head>
       {user ? (
         <p>
-          <button onClick={logOut}>logout</button>
+          <button className={styles.loginButton} onClick={logOut}>
+            LOGOUT
+          </button>
         </p>
       ) : (
         <p>
-          <button onClick={logIn}>login</button>
+          <button className={styles.loginButton} onClick={logIn}>
+            LOGIN
+          </button>
         </p>
       )}
 
