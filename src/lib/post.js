@@ -21,8 +21,11 @@ export async function getAllPosts() {
     }
   );
   const { records } = await res.json();
-  console.log(records);
-  return []; //sortable;
+  const posts = records.map((record) => ({
+    id: record.id,
+    ...record.fields,
+  }));
+  return posts; //[]; //sortable;
 }
 
 export async function createPost(data) {
