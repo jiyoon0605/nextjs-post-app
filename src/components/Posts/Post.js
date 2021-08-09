@@ -1,7 +1,6 @@
 import styles from "./Post.module.css";
 import { FaHeart, FaShareAlt } from "react-icons/fa";
 const Post = ({ contents, date }) => {
-  console.log(styles.postsContent);
   return (
     <>
       <p className={styles.postsContent}>{contents}</p>

@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.scss";
 import avatar from "../res/avatar.png";
 import { useAuth } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
+import { getAllPosts, createPost } from "../lib/post";
 
 export default function Home({ posts: defaultPosts }) {
   const [posts, updatedPost] = useState(defaultPosts);
@@ -13,15 +14,8 @@ export default function Home({ posts: defaultPosts }) {
 
   async function handleOnSubmit(data, e) {
     e.preventDefault();
-
-    await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`, {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
-    );
-    const { posts } = await response.json();
+    await createPost(data);
+    const posts = await getAllPosts();
     updatedPost(posts);
   }
 
@@ -64,10 +58,7 @@ export default function Home({ posts: defaultPosts }) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
-  );
-  const { posts } = await response.json();
+  const posts = await getAllPosts();
   return {
     props: {
       posts,
