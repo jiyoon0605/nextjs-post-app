@@ -4,7 +4,7 @@ export async function getAllPosts() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
   );
-  const { posts } = await response.json(); //.sort((a, b) => a.date > b.date);
+  const { posts } = await response.json();
 
   const sortable = [];
   for (let post of posts) {
@@ -17,12 +17,9 @@ export async function getAllPosts() {
 
 export async function createPost(data) {
   const user = auth.currentUser();
-  console.log(user);
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`,
-    {
-      method: "POST",
-      body: JSON.stringify(data),
-    }
-  );
+  console.log("user", user.token);
+  await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
 }
