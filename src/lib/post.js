@@ -2,7 +2,7 @@ import { auth } from "./auth";
 
 export async function getAllPosts() {
   const response = await fetch(
-    `https://mystifying-lovelace-13366a.netlify.app/api/posts`
+    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
   );
   const { posts } = await response.json();
 
@@ -12,7 +12,7 @@ export async function getAllPosts() {
   }
   sortable.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  return [];
+  return sortable;
 }
 
 export async function createPost(data) {
