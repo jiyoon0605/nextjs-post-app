@@ -4,10 +4,10 @@
 export default async (req, res) => {
   if (req.method === "GET") {
     const response = await fetch(
-      `https://api.airtable.com/v0/appH07n9qNuWkjHOS/Posts`,
+      `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Posts`,
       {
         headers: {
-          Authorization: `Bearer keyq6zVtjIXOLmrqp`,
+          Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
         },
       }
     );

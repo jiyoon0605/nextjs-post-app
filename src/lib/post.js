@@ -12,7 +12,7 @@ export async function getAllPosts() {
   }
   sortable.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  return sortable;
+  return [];
 }
 
 export async function createPost(data) {
