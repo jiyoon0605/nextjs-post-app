@@ -51,7 +51,7 @@ export default function Home({ posts: defaultPosts }) {
             </li>
           ))}
         </ul>
-        {!user && <PostForm onSubmit={handleOnSubmit} />}
+        {user && <PostForm onSubmit={handleOnSubmit} />}
       </main>
     </div>
   );

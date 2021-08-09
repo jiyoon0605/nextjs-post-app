@@ -2,7 +2,11 @@ import { auth } from "./auth";
 
 export async function getAllPosts() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
+    `${
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_API__PRODUCTION_ENDPOINT
+        : process.env.NEXT_PUBLIC_API_ENDPOINT
+    }/api/posts`
   );
   const { posts } = await response.json();
 
@@ -18,8 +22,18 @@ export async function getAllPosts() {
 export async function createPost(data) {
   const user = auth.currentUser();
   console.log("user", user.token);
-  await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`, {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+  await fetch(
+    `${
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_API__PRODUCTION_ENDPOINT
+        : process.env.NEXT_PUBLIC_API_ENDPOINT
+    }/api/posts`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        Authorization: `Bearer ${user.token.access_token}`,
+      },
+    }
+  );
 }

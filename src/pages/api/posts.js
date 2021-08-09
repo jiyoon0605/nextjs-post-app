@@ -21,6 +21,14 @@ export default async (req, res) => {
     res.status(200).json({ posts });
     return;
   } else if (req.method === "POST") {
+    const { authorization } = req.headers;
+    const auth = await fetch(`${process.env.NEXT_PUBLIC_AUTH_ENDPOINT}/user`, {
+      headers: {
+        Authorization: authorization,
+      },
+    });
+    const authJson = await auth.json();
+    console.log("authJson", authJson);
     const { content } = JSON.parse(req.body);
     const data = {
       fields: {
