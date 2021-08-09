@@ -5,7 +5,7 @@ import { Bio } from "../components/Bio";
 import styles from "../styles/Home.module.scss";
 import avatar from "../res/avatar.png";
 import { useAuth } from "../hooks/useAuth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAllPosts, createPost } from "../lib/post";
 
 export default function Home({ posts: defaultPosts }) {
