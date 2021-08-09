@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.scss";
 import avatar from "../res/avatar.png";
 import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
-//import { getAllPosts, createPost } from "../lib/post";
+import { getAllPosts, createPost } from "../lib/post";
 
 export default function Home({ posts: defaultPosts }) {
   const [posts, updatedPost] = useState(defaultPosts);
@@ -45,11 +45,11 @@ export default function Home({ posts: defaultPosts }) {
         />
         <h1 className={styles.title}>My Post</h1>
         <ul className={styles.posts}>
-          {/* {posts.map((post) => (
+          {posts.map((post) => (
             <li key={post.id}>
               <Post contents={post.content} date={post.date} />
             </li>
-          ))} */}
+          ))}
         </ul>
         {user && <PostForm onSubmit={handleOnSubmit} />}
       </main>
@@ -57,11 +57,11 @@ export default function Home({ posts: defaultPosts }) {
   );
 }
 
-// export async function getStaticProps() {
-//   const posts = await getAllPosts();
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// }
+export async function getStaticProps() {
+  const posts = await getAllPosts();
+  return {
+    props: {
+      posts,
+    },
+  };
+}
